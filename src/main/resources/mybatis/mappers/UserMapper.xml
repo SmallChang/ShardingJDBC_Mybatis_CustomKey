@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.cly.dao.UserMapper">
+  <resultMap id="BaseResultMap" type="org.cly.entity.User">
+    <id column="ID"  jdbcType="LONGVARCHAR" property="id" />
+    <result column="OBJECT_ID" jdbcType="VARCHAR" property="objectId" />
+    <result column="TYPE" jdbcType="VARCHAR" property="type" />
+    <result column="CONTENT" jdbcType="VARCHAR" property="content" />
+    <result column="NOTIFIER" jdbcType="VARCHAR" property="notifier" />
+    <result column="CREATE_TIME" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="UPDATE_TIME" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="IS_READ" jdbcType="TINYINT" property="isRead" />
+    <result column="IS_AT" jdbcType="TINYINT" property="isAt" />
+    <result column="IS_NEW" jdbcType="TINYINT" property="isNew" />
+    <result column="IS_VALID" jdbcType="TINYINT" property="isValid" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    ID, OBJECT_ID, TYPE, CONTENT, NOTIFIER, CREATE_TIME, UPDATE_TIME, IS_READ, IS_AT, 
+    IS_NEW, IS_VALID
+  </sql>
+
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from notice_v2
+  </select>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from notice_v2
+    where ID = #{id,jdbcType=INTEGER}
+  </delete>
+
+  <insert id="insert" parameterType="org.cly.entity.User">
+    insert into notice_v2 (ID, OBJECT_ID, TYPE, 
+      CONTENT, NOTIFIER, CREATE_TIME, 
+      UPDATE_TIME, IS_READ, IS_AT, 
+      IS_NEW, IS_VALID)
+    values (#{id,jdbcType=INTEGER}, #{objectId,jdbcType=VARCHAR}, #{type,jdbcType=VARCHAR}, 
+      #{content,jdbcType=VARCHAR}, #{notifier,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{updateTime,jdbcType=TIMESTAMP}, #{isRead,jdbcType=TINYINT}, #{isAt,jdbcType=TINYINT}, 
+      #{isNew,jdbcType=TINYINT}, #{isValid,jdbcType=TINYINT})
+  </insert>
+
+
+  <insert id="insertSelective"  parameterType="org.cly.entity.User">
+    insert into notice_v2
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="objectId != null">
+        OBJECT_ID,
+      </if>
+      <if test="type != null">
+        TYPE,
+      </if>
+      <if test="content != null">
+        CONTENT,
+      </if>
+      <if test="notifier != null">
+        NOTIFIER,
+      </if>
+      <if test="createTime != null">
+        CREATE_TIME,
+      </if>
+      <if test="updateTime != null">
+        UPDATE_TIME,
+      </if>
+      <if test="isRead != null">
+        IS_READ,
+      </if>
+      <if test="isAt != null">
+        IS_AT,
+      </if>
+      <if test="isNew != null">
+        IS_NEW,
+      </if>
+      <if test="isValid != null">
+        IS_VALID,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="objectId != null">
+        #{objectId,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null">
+        #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="notifier != null">
+        #{notifier,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isRead != null">
+        #{isRead,jdbcType=TINYINT},
+      </if>
+      <if test="isAt != null">
+        #{isAt,jdbcType=TINYINT},
+      </if>
+      <if test="isNew != null">
+        #{isNew,jdbcType=TINYINT},
+      </if>
+      <if test="isValid != null">
+        #{isValid,jdbcType=TINYINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="org.cly.entity.User">
+    update notice_v2
+    <set>
+      <if test="objectId != null">
+        OBJECT_ID = #{objectId,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        TYPE = #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null">
+        CONTENT = #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="notifier != null">
+        NOTIFIER = #{notifier,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isRead != null">
+        IS_READ = #{isRead,jdbcType=TINYINT},
+      </if>
+      <if test="isAt != null">
+        IS_AT = #{isAt,jdbcType=TINYINT},
+      </if>
+      <if test="isNew != null">
+        IS_NEW = #{isNew,jdbcType=TINYINT},
+      </if>
+      <if test="isValid != null">
+        IS_VALID = #{isValid,jdbcType=TINYINT},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="org.cly.entity.User">
+    update notice_v2
+    set OBJECT_ID = #{objectId,jdbcType=VARCHAR},
+      TYPE = #{type,jdbcType=VARCHAR},
+      CONTENT = #{content,jdbcType=VARCHAR},
+      NOTIFIER = #{notifier,jdbcType=VARCHAR},
+      CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
+      IS_READ = #{isRead,jdbcType=TINYINT},
+      IS_AT = #{isAt,jdbcType=TINYINT},
+      IS_NEW = #{isNew,jdbcType=TINYINT},
+      IS_VALID = #{isValid,jdbcType=TINYINT}
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+
+
+  <select id="selectUsers" resultType="string">
+    select
+    id
+    from user
+  </select>
+
+  <insert id="insertSelect">
+        insert into ${tableName}
+        (ID,OBJECT_ID,TYPE,CONTENT,NOTIFIER,CREATE_TIME,UPDATE_TIME)
+        select ID OBJECT_ID,TYPE,CONTENT,NOTIFIER,CREATE_TIME,UPDATE_TIME
+        from notice_v2
+        where NOTIFIER in
+        <foreach collection="ids" separator="," open="(" close=")" item="item">
+          #{item}
+        </foreach>
+  </insert>
+</mapper>
